@@ -1601,10 +1601,20 @@ textarea:focus-visible {
     background:rgba(99,102,241,.1);
 
 }
+
+
 @media (max-width: 768px) {
 
-    .stats-grid {
+    .stats {
         grid-template-columns: 1fr;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
     }
 
 }
