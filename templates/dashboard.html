@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard – Job Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <span class="eyebrow">Dashboard Overview</span>
+    <h1>Welcome back, yo</h1>
+
+    <p class="subtitle">
+        Here is your job search overview.
+    </p>
+
+
+    <div class="stats">
+
+        <div class="card">
+            <h3>Total</h3>
+            <p>{{ applications|length }}</p>
+        </div>
+
+        <div class="card applied">
+            <h3>Applied</h3>
+            <p>{{ applications|selectattr("status", "equalto", "Applied")|list|length }}</p>
+        </div>
+
+        <div class="card interview">
+            <h3>Interview</h3>
+            <p>{{ applications|selectattr("status", "equalto", "Interview")|list|length }}</p>
+        </div>
+
+        <div class="card offer">
+            <h3>Offer</h3>
+            <p>{{ applications|selectattr("status", "equalto", "Offer")|list|length }}</p>
+        </div>
+
+        <div class="card rejected">
+            <h3>Rejected</h3>
+            <p>{{ applications|selectattr("status", "equalto", "Rejected")|list|length }}</p>
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h2>Recent Applications</h2>
+
+            <a href="{{ url_for('applications.add_application') }}" class="btn">
+                + Add Job
+            </a>
+        </div>
+
+
+        {% if recent_applications %}
+
+        <div class="table-wrap">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for app in recent_applications %}
+                    <tr>
+                        <td data-label="Company">
+                            <div class="company-cell">
+                                <span class="company-avatar">{{ app.company[0]|upper }}</span>
+                                <span class="company-name">{{ app.company }}</span>
+                            </div>
+                        </td>
+                        <td data-label="Role">{{ app.role }}</td>
+                        <td data-label="Status">
+                            <span class="status-pill {{ app.status|lower }}">{{ app.status }}</span>
+                        </td>
+                        <td data-label="Actions">
+                            <a href="{{ url_for('applications.edit_application', id=app.id) }}" class="action-link">Edit</a>
+                            <a href="{{ url_for('applications.delete_application', id=app.id) }}"
+                               class="action-link delete"
+                               onclick="return confirm('Delete this application?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+        <div style="padding: 16px 24px; border-top: 1px solid var(--border-soft); text-align: center;">
+            <a href="{{ url_for('applications.all_applications') }}" style="color: var(--primary); font-weight: 600; font-size: 14px; text-decoration: none;">
+                View all applications →
+            </a>
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-state-icon">+</div>
+            <p>No applications yet. Click "+ Add Job" to get started.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

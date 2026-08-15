@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Application – Job Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="form-page-header">
+        <h1>Edit Application</h1>
+        <p class="subtitle">Update the details for this application.</p>
+    </div>
+
+    <div class="form-box">
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input
+                        type="text"
+                        name="company"
+                        value="{{ application.company }}"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Job Role</label>
+                    <input
+                        type="text"
+                        name="role"
+                        value="{{ application.role }}"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input
+                        type="text"
+                        name="location"
+                        value="{{ application.location }}">
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Status</label>
+
+                    <select name="status">
+
+                        <option value="Applied" {{ 'selected' if application.status == 'Applied' }}>
+                            Applied
+                        </option>
+
+                        <option value="Interview" {{ 'selected' if application.status == 'Interview' }}>
+                            Interview
+                        </option>
+
+                        <option value="Offer" {{ 'selected' if application.status == 'Offer' }}>
+                            Offer
+                        </option>
+
+                        <option value="Rejected" {{ 'selected' if application.status == 'Rejected' }}>
+                            Rejected
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Applied Date</label>
+
+                    <input
+                        type="date"
+                        name="applied_date"
+                        value="{{ application.applied_date }}">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Job URL</label>
+
+                    <input
+                        type="url"
+                        name="job_url"
+                        value="{{ application.job_url }}">
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Notes</label>
+
+                <textarea name="notes">{{ application.notes }}</textarea>
+
+            </div>
+
+
+
+            <div class="form-actions">
+
+                <button class="btn" type="submit">
+                    Update Application
+                </button>
+
+
+                <a href="{{ url_for('applications.dashboard') }}" 
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

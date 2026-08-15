@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}All Applications – Job Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <span class="eyebrow">Job Notebook</span>
+    <h1 style="font-size: 34px;">All Applications</h1>
+
+    <p class="subtitle">
+        {{ applications|length }} application{{ '' if applications|length == 1 else 's' }}
+        {% if search or status_filter %} matching your filters{% endif %}
+    </p>
+
+
+    <form method="GET" class="filter-bar">
+
+        <input
+            type="text"
+            name="search"
+            class="search-input"
+            placeholder="Search by company or role..."
+            value="{{ search }}">
+
+        <select name="status" class="filter-select" onchange="this.form.submit()">
+            <option value="" {{ 'selected' if not status_filter }}>All statuses</option>
+            <option value="Applied" {{ 'selected' if status_filter == 'Applied' }}>Applied</option>
+            <option value="Interview" {{ 'selected' if status_filter == 'Interview' }}>Interview</option>
+            <option value="Offer" {{ 'selected' if status_filter == 'Offer' }}>Offer</option>
+            <option value="Rejected" {{ 'selected' if status_filter == 'Rejected' }}>Rejected</option>
+        </select>
+
+        <button type="submit" class="btn btn-secondary">Search</button>
+
+        {% if search or status_filter %}
+        <a href="{{ url_for('applications.all_applications') }}" class="btn btn-secondary">Clear</a>
+        {% endif %}
+
+    </form>
+
+
+    {% if applications %}
+
+    <div class="job-grid">
+
+        {% for app in applications %}
+        <div class="job-card">
+
+            <div class="job-card-top">
+
+                <div class="job-card-company">
+                    <span class="company-avatar">{{ app.company[0]|upper }}</span>
+                    <div class="job-card-info">
+                        <h3>{{ app.company }}</h3>
+                        <p>{{ app.role }}</p>
+                    </div>
+                </div>
+
+                <span class="status-pill {{ app.status|lower }}">{{ app.status }}</span>
+
+            </div>
+
+            <div class="job-card-meta">
+                {% if app.location %}
+                    <span>{{ app.location }}</span> ·
+                {% endif %}
+                {% if app.applied_date %}
+                    <span>Applied {{ app.applied_date }}</span>
+                {% endif %}
+                {% if app.job_url %}
+                    · <a href="{{ app.job_url }}" target="_blank" rel="noopener">Job link ↗</a>
+                {% endif %}
+            </div>
+
+            <div class="job-card-actions">
+                <a href="{{ url_for('applications.edit_application', id=app.id) }}" class="action-link">Edit</a>
+                <a href="{{ url_for('applications.delete_application', id=app.id) }}"
+                   class="action-link delete"
+                   onclick="return confirm('Delete this application?');">Delete</a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+        <div class="empty-state-icon">{{ '?' if search or status_filter else '+' }}</div>
+        <p>
+            {% if search or status_filter %}
+                No applications match your search.
+            {% else %}
+                No applications yet. Click "+ Add Job" to get started.
+            {% endif %}
+        </p>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

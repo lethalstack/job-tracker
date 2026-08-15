@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Register – Job Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container" style="max-width: 440px;">
+
+    <span class="eyebrow">Get started</span>
+    <h1 style="font-size: 32px;">Create Account</h1>
+    <p class="subtitle">Start tracking your job applications.</p>
+
+    <div class="form-box" style="padding: 28px;">
+
+        <form method="POST">
+
+            <label>Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="yourusername"
+                required
+                autofocus>
+
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required>
+
+            <label>Confirm Password</label>
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="••••••••"
+                required>
+
+            <button class="btn" type="submit" style="width: 100%; margin-top: 6px;">
+                Register
+            </button>
+
+        </form>
+
+    </div>
+
+    <p class="subtitle" style="margin-top: 20px; margin-bottom: 0; text-align: center;">
+        Already have an account?
+        <a href="{{ url_for('auth.login') }}" style="color: var(--primary); font-weight: 600;">
+            Log in
+        </a>
+    </p>
+
+</div>
+
+{% endblock %}
