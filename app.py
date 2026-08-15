@@ -10,6 +10,9 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 
+import os
+
+os.makedirs(os.path.join(app.root_path, "instance"), exist_ok=True)
 db.init_app(app)
 login_manager.init_app(app)
 
