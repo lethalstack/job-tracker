@@ -1601,3 +1601,10 @@ textarea:focus-visible {
     background:rgba(99,102,241,.1);
 
 }
+@media (max-width: 768px) {
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
