@@ -44,16 +44,6 @@
 
         {% if current_user.is_authenticated %}
 
-
-            <a href="{{ url_for('applications.dashboard') }}"
-               class="{{ 'active' if request.endpoint == 'applications.dashboard' }}">
-
-                Dashboard
-
-            </a>
-
-
-
             <a href="{{ url_for('applications.all_applications') }}"
                class="{{ 'active' if request.endpoint == 'applications.all_applications' }}">
 
