@@ -22,4 +22,3 @@ A Flask-based job application tracker.
 - SQLite
 - HTML
 - CSS
-- JavaScript
