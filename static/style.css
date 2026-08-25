@@ -1253,9 +1253,9 @@ h1 {
     }
 
     .theme-toggle {
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
     }
 
     .profile-icon {
@@ -1349,6 +1349,15 @@ h1 {
         margin-right: 16px;
     }
 
+    td:has(.action-link) {
+    justify-content: flex-end;
+    gap: 8px;
+    
+    }
+    td:has(.action-link)::before {
+    display: none;
+    }
+
     .job-card {
         padding: 24px;
     }
@@ -1389,18 +1398,18 @@ h1 {
     }
 
     .logo {
-        font-size: 15px;
+        font-size: 13px;
     }
 
-    .navbar a {
-        font-size: 12px;
-        padding: 6px 10px;
+    .logo-icon {
+        width: 16px;
+        height: 16px;
     }
 
     .theme-toggle {
-        width: 34px;
-        height: 34px;
-        font-size: 14px;
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
     }
 
     .profile-icon {
