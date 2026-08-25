@@ -1,4 +1,4 @@
-# 💼 Job Tracker
+# ↗ Job Tracker
 
 A Flask-based job application tracker.
 
